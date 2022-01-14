@@ -4,7 +4,7 @@ import os
 import copy
 
 
-def random_board_state(width, height):
+def random_board_state(height, width):
     """ 
         Creates a board of dimensions width x height in which all elements are initialized to zero
         int -> List
@@ -15,7 +15,7 @@ def random_board_state(width, height):
     for i in range(height):
         for j in range(width):
             prob = random()
-            if prob >= 0.8:
+            if prob >= 0.5:
                 board[i][j] = 1
     return board
 
@@ -60,7 +60,7 @@ def valid_index(x, y, width, height):
 
     if x < 0 or y < 0:
         return False
-    elif x >= width or y >= height:
+    elif x >= height or y >= width:
         return False
      
     return True
@@ -123,10 +123,12 @@ def next_board_state(state):
     return S
     
 
-B = random_board_state(100, 100)
+w, h = int(input("Enter width:")), int(input("Enter Height:"))
+os.system("cls")
+B = random_board_state(h, w)
 
 while True:
     render(B)
     B = next_board_state(B)
-    # sleep(0.2)
+    sleep(0.05)
     os.system("cls")
